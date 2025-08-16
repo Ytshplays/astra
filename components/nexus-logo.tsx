@@ -12,9 +12,6 @@ export function AstraLogo({ className }: { className?: string }) {
         className="rounded-lg"
         priority
       />
-      <span className="ml-2 text-xl sm:text-2xl font-bold">
-        ASTRA
-      </span>
     </div>
   );
 }
