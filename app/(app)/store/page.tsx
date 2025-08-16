@@ -8,9 +8,10 @@ import { ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '@/lib/firebase';
-import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { GrokParticleBackground } from '@/components/grok-particle-background';
+import { freeGames } from '@/lib/free-games';
 
 type Game = {
     id: string;
@@ -27,7 +28,24 @@ export default function StorePage() {
   const [user] = useAuthState(auth);
   const { toast } = useToast();
   const [storeItems, setStoreItems] = useState<Game[]>([]);
+  const [ownedGames, setOwnedGames] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
+
+  // Fetch user's owned games
+  useEffect(() => {
+    if (!user) {
+      setOwnedGames(new Set());
+      return;
+    }
+
+    const userGamesCollection = collection(db, 'users', user.uid, 'games');
+    const unsubscribe = onSnapshot(userGamesCollection, (snapshot) => {
+      const owned = new Set<string>(snapshot.docs.map(doc => doc.id));
+      setOwnedGames(owned);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   useEffect(() => {
       const fetchGames = async () => {
@@ -37,71 +55,13 @@ export default function StorePage() {
               const gamesSnapshot = await getDocs(gamesCollection);
               
               if (gamesSnapshot.empty) {
-                  // Add some default free games
-                  const defaultGames = [
-                      {
-                          id: 'valorant',
-                          title: 'Valorant',
-                          price: '0',
-                          imageUrl: 'https://placehold.co/400x300/FF4655/FFFFFF?text=Valorant',
-                          platform: 'PC',
-                          dataAiHint: 'tactical shooter',
-                          achievements: []
-                      },
-                      {
-                          id: 'fortnite',
-                          title: 'Fortnite',
-                          price: '0',
-                          imageUrl: 'https://placehold.co/400x300/9146FF/FFFFFF?text=Fortnite',
-                          platform: 'PC, Console, Mobile',
-                          dataAiHint: 'battle royale',
-                          achievements: []
-                      },
-                      {
-                          id: 'apex-legends',
-                          title: 'Apex Legends',
-                          price: '0',
-                          imageUrl: 'https://placehold.co/400x300/FF6600/FFFFFF?text=Apex+Legends',
-                          platform: 'PC, Console',
-                          dataAiHint: 'hero shooter',
-                          achievements: []
-                      },
-                      {
-                          id: 'league-of-legends',
-                          title: 'League of Legends',
-                          price: '0',
-                          imageUrl: 'https://placehold.co/400x300/0596AA/FFD700?text=League+of+Legends',
-                          platform: 'PC',
-                          dataAiHint: 'moba',
-                          achievements: []
-                      },
-                      {
-                          id: 'rocket-league',
-                          title: 'Rocket League',
-                          price: '0',
-                          imageUrl: 'https://placehold.co/400x300/FF8C00/0000FF?text=Rocket+League',
-                          platform: 'PC, Console',
-                          dataAiHint: 'car soccer',
-                          achievements: []
-                      },
-                      {
-                          id: 'fall-guys',
-                          title: 'Fall Guys',
-                          price: '0',
-                          imageUrl: 'https://placehold.co/400x300/FF69B4/FFFFFF?text=Fall+Guys',
-                          platform: 'PC, Console, Mobile',
-                          dataAiHint: 'party game',
-                          achievements: []
-                      }
-                  ];
-                  
-                  // Add default games to Firebase
-                  for (const game of defaultGames) {
+                  // Add default free games to Firebase
+                  for (const game of freeGames) {
                       const gameRef = doc(db, 'games', game.id);
                       await setDoc(gameRef, game);
                   }
                   
-                  setStoreItems(defaultGames);
+                  setStoreItems(freeGames);
               } else {
                   const gamesList = gamesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Game));
                   setStoreItems(gamesList);
@@ -109,26 +69,7 @@ export default function StorePage() {
           } catch (error) {
               console.error('Error fetching games:', error);
               // Set some default games even if Firebase fails
-              setStoreItems([
-                  {
-                      id: 'valorant',
-                      title: 'Valorant',
-                      price: '0',
-                      imageUrl: 'https://placehold.co/400x300/FF4655/FFFFFF?text=Valorant',
-                      platform: 'PC',
-                      dataAiHint: 'tactical shooter',
-                      achievements: []
-                  },
-                  {
-                      id: 'fortnite',
-                      title: 'Fortnite',
-                      price: '0',
-                      imageUrl: 'https://placehold.co/400x300/9146FF/FFFFFF?text=Fortnite',
-                      platform: 'PC, Console, Mobile',
-                      dataAiHint: 'battle royale',
-                      achievements: []
-                  }
-              ]);
+              setStoreItems(freeGames.slice(0, 2));
           } finally {
               setLoading(false);
           }
@@ -139,6 +80,12 @@ export default function StorePage() {
   const handleBuyGame = async (item: Game) => {
       if (!user) {
           toast({ variant: 'destructive', title: 'Not signed in', description: 'You must be signed in to purchase games.' });
+          return;
+      }
+      
+      // Check if user already owns this game
+      if (ownedGames.has(item.id)) {
+          toast({ variant: 'destructive', title: 'Already Owned', description: 'You already own this game.' });
           return;
       }
       
@@ -209,10 +156,22 @@ export default function StorePage() {
                     variant="secondary" 
                     size="sm" 
                     onClick={() => handleBuyGame(item)}
-                    className={`text-xs px-2 py-1 h-auto ${Number(item.price) === 0 ? 'bg-green-600 hover:bg-green-700 text-white' : ''}`}
+                    disabled={ownedGames.has(item.id)}
+                    className={`text-xs px-2 py-1 h-auto ${
+                      ownedGames.has(item.id) 
+                        ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
+                        : Number(item.price) === 0 
+                          ? 'bg-green-600 hover:bg-green-700 text-white' 
+                          : ''
+                    }`}
                   >
                     <ShoppingCart className="mr-1 h-2.5 w-2.5 sm:h-3 sm:w-3" />
-                    {Number(item.price) === 0 ? 'Get' : 'Buy'}
+                    {ownedGames.has(item.id) 
+                      ? 'Owned' 
+                      : Number(item.price) === 0 
+                        ? 'Get' 
+                        : 'Buy'
+                    }
                   </Button>
                 </div>
               </CardFooter>
