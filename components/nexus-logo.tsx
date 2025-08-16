@@ -1,11 +1,17 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export function AstraLogo({ className }: { className?: string }) {
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
-      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-        <span className="text-white font-bold text-lg">A</span>
-      </div>
+      <Image
+        src="/ASTRA_(1)[1].png"
+        alt="Astra Logo"
+        width={28}
+        height={28}
+        className="rounded-lg"
+        priority
+      />
     </div>
   );
 }
