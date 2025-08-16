@@ -114,7 +114,6 @@ export default function DashboardPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                       <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-2 right-1 sm:right-2">
                         <h3 className="text-white text-xs sm:text-sm font-bold line-clamp-2 leading-tight">{game.title}</h3>
-                        <p className="text-white/70 text-xs line-clamp-1">{game.platform}</p>
                       </div>
                       <div className="absolute top-1 sm:top-2 right-1 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <PlayCircle className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-white" />
