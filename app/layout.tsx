@@ -7,6 +7,11 @@ import { ClientWrapper } from '@/components/client-wrapper';
 export const metadata: Metadata = {
   title: 'Astra',
   description: 'A new revolution in the gaming console industry.',
+  icons: {
+    icon: '/ASTRA_(1)[1].png',
+    shortcut: '/ASTRA_(1)[1].png',
+    apple: '/ASTRA_(1)[1].png',
+  },
 };
 
 export default function RootLayout({
