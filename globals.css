@@ -1,0 +1,451 @@
+@import './booting-animation.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+/* Responsive text scaling */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222 84% 6.5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 262 84% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 347 90% 58%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 262 84% 58%;
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 262 84% 58%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 347 90% 58%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 262 84% 58%;
+  }
+
+  .dark {
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222 84% 6.5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 262 84% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 347 90% 58%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 262 84% 58%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 222 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 262 84% 58%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 347 90% 58%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 262 84% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    /* Prevent horizontal scrolling on mobile */
+    overflow-x: hidden;
+  }
+
+  /* Responsive containers */
+  .responsive-container {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
+    max-width: 100vw;
+  }
+
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+
+  .responsive-text-sm {
+    @apply text-xs sm:text-sm lg:text-base;
+  }
+
+  .responsive-text-base {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+
+  .responsive-text-lg {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+
+  .responsive-text-xl {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+
+  .responsive-text-2xl {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+  }
+
+  /* Responsive spacing */
+  .responsive-spacing {
+    @apply space-y-4 sm:space-y-6 lg:space-y-8;
+  }
+
+  .responsive-padding {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+
+  .responsive-margin {
+    @apply m-4 sm:m-6 lg:m-8;
+  }
+
+  /* Responsive card sizing */
+  .responsive-card {
+    @apply min-h-[200px] sm:min-h-[250px] lg:min-h-[300px];
+  }
+
+  /* Console UI - Responsive Styles */
+  .console-border {
+    border: 1px solid #00ff41;
+    box-shadow: 
+      0 0 3px #00ff41,
+      inset 0 0 3px rgba(0, 255, 65, 0.1);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (min-width: 640px) {
+    .console-border {
+      border: 2px solid #00ff41;
+      box-shadow: 
+        0 0 5px #00ff41,
+        inset 0 0 5px rgba(0, 255, 65, 0.1);
+    }
+  }
+
+  .console-text {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    color: #00ff41;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  }
+
+  @media (min-width: 640px) {
+    .console-text {
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+  }
+
+  .console-button {
+    background: linear-gradient(45deg, #00ff41, #00cc33);
+    color: #000000;
+    border: 1px solid #00ff41;
+    box-shadow: 
+      0 0 5px rgba(0, 255, 65, 0.3),
+      inset 0 0 3px rgba(255, 255, 255, 0.1);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+  }
+
+  @media (min-width: 640px) {
+    .console-button {
+      box-shadow: 
+        0 0 10px rgba(0, 255, 65, 0.3),
+        inset 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .console-button:hover {
+    background: linear-gradient(45deg, #00cc33, #00ff41);
+    box-shadow: 
+      0 0 10px rgba(0, 255, 65, 0.5),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 640px) {
+    .console-button:hover {
+      box-shadow: 
+        0 0 15px rgba(0, 255, 65, 0.5),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+  }
+
+  .console-card {
+    background: radial-gradient(circle at top left, rgba(0, 20, 40, 0.9), rgba(0, 0, 0, 0.9));
+    border: 1px solid #00ff41;
+    box-shadow: 
+      0 0 10px rgba(0, 255, 65, 0.2),
+      inset 0 0 5px rgba(0, 255, 65, 0.05);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (min-width: 640px) {
+    .console-card {
+      box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.2),
+        inset 0 0 10px rgba(0, 255, 65, 0.05);
+    }
+  }
+
+  .console-status-bar {
+    background: linear-gradient(90deg, #000000, #001a00, #000000);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    font-family: 'JetBrains Mono', monospace;
+    padding: clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(0.625rem, 1.2vw, 0.875rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Responsive navigation adjustments */
+  .console-nav {
+    @apply hidden lg:flex;
+  }
+
+  .console-nav-mobile {
+    @apply lg:hidden;
+  }
+
+  /* Responsive header height */
+  .console-header {
+    height: clamp(60px, 10vw, 80px);
+  }
+
+  /* Mobile-first grid improvements */
+  .console-grid {
+    background-image: 
+      linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+    background-size: clamp(15px, 3vw, 20px) clamp(15px, 3vw, 20px);
+  }
+
+  @media (min-width: 640px) {
+    .console-grid {
+      background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+    }
+  }
+
+  /* Responsive animations */
+  .animated-gradient {
+    background-size: 300% 300%;
+    animation: gradient-animation 15s ease infinite;
+    background-image: linear-gradient(
+      -45deg,
+      hsl(var(--primary) / 0.15),
+      hsl(var(--background)),
+      hsl(var(--accent) / 0.15),
+      hsl(var(--background))
+    );
+  }
+
+  .animated-card {
+    will-change: transform, box-shadow;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+
+  .animated-card:hover {
+    transform: translateY(clamp(-1px, -0.3vw, -2px));
+    box-shadow: 0 clamp(4px, 1vw, 8px) clamp(15px, 3vw, 25px) rgba(0, 0, 0, 0.15);
+  }
+
+  /* Responsive glow effects */
+  .console-glow {
+    animation: console-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes console-glow {
+    from {
+      text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+      box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+    }
+    to {
+      text-shadow: 0 0 clamp(10px, 2vw, 20px) rgba(0, 255, 65, 0.8);
+      box-shadow: 0 0 clamp(10px, 2vw, 20px) rgba(0, 255, 65, 0.5);
+    }
+  }
+
+  /* Responsive scanlines */
+  .console-scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .console-scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      transparent 50%,
+      rgba(0, 255, 65, 0.02) 50%
+    );
+    background-size: 100% clamp(2px, 0.5vw, 4px);
+    pointer-events: none;
+    animation: scanlines 0.1s linear infinite;
+  }
+
+  @media (min-width: 640px) {
+    .console-scanlines::after {
+      background: linear-gradient(
+        transparent 50%,
+        rgba(0, 255, 65, 0.03) 50%
+      );
+    }
+  }
+
+  /* Touch-friendly interactive elements */
+  @media (max-width: 640px) {
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    .console-button {
+      min-height: 44px;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  /* Responsive modal adjustments */
+  @media (max-width: 640px) {
+    .modal-content {
+      margin: 1rem;
+      max-height: calc(100vh - 2rem);
+      overflow-y: auto;
+    }
+  }
+
+  /* Status indicators responsive sizing */
+  .status-indicator::after {
+    width: clamp(6px, 1.5vw, 8px);
+    height: clamp(6px, 1.5vw, 8px);
+  }
+
+  /* Responsive fade-in animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(clamp(10px, 2vw, 20px));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  /* Print styles */
+  @media print {
+    .console-glow,
+    .animated-gradient,
+    .console-scanlines::after {
+      animation: none !important;
+    }
+    
+    .console-border {
+      border: 1px solid #333 !important;
+      box-shadow: none !important;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animated-gradient,
+    .console-glow,
+    .animated-card,
+    .animate-fade-in-up {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(clamp(2px, 0.5vw, 4px)); }
+}

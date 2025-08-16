@@ -1,0 +1,53 @@
+/* best in chrome */
+:root {
+  --orb-size: 100px;
+  --particle-size: 2px;
+  --time: 14s;
+}
+
+body {
+  background: black;
+  overflow: hidden; /* no scrollbars.. */
+}
+
+.wrap {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: rotate var(--time) infinite linear; /* rotate orb */
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+}
+
+.c {
+  position: absolute;
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.c {
+  animation: orbit var(--time) infinite;
+  background-color: hsla(0, 100%, 50%, 1); /* Default color */
+}
+
+@keyframes orbit {
+    20% {
+      opacity: 1; /* fade in */
+    }
+    30% {
+      transform: rotateZ(var(--random-z, 0deg)) rotateY(var(--random-y, 0deg)) translateX(var(--orb-size)) rotateZ(var(--random-z, 0deg)); /* form orb with CSS variables */
+    }
+    100% {
+       transform: rotateZ(var(--random-z, 0deg)) rotateY(var(--random-y, 0deg)) translateX( calc(var(--orb-size) * 3) ) rotateZ(var(--random-z, 0deg)); /* translateX * 3 with CSS variables */
+    }
+  }
