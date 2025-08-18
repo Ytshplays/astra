@@ -87,7 +87,7 @@ export function WelcomeDialog() {
         {step === 0 && (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl">Welcome to Nexus Hub!</DialogTitle>
+              <DialogTitle className="text-2xl">Welcome to ASTRA!</DialogTitle>
               <DialogDescription>
                 To get you started, tell us what you like so our AI can find your next favorite game.
               </DialogDescription>

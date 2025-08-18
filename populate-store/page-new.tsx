@@ -44,7 +44,7 @@ export default function PopulateStorePage() {
       <Card className="max-w-2xl mx-auto console-border">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-green-400">
-            🎮 NEXUS STORE POPULATION TOOL
+            🎮 ASTRA STORE POPULATION TOOL
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">

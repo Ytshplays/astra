@@ -64,7 +64,7 @@ export default function ProfilePage() {
 
     // Memoized user data to prevent unnecessary re-renders
     const userData = useMemo(() => ({
-        userName: user?.displayName || 'Nexus Player',
+        userName: user?.displayName || 'ASTRA Player',
         userHandle: user?.email ? `@${user.email.split('@')[0]}` : '',
         userAvatar: user?.photoURL || `https://api.dicebear.com/8.x/bottts/svg?seed=${user?.uid}`
     }), [user?.displayName, user?.email, user?.photoURL, user?.uid]);

@@ -112,7 +112,7 @@ export default function ProfilePage() {
         }
     };
 
-    const userName = user?.displayName || 'Nexus Player';
+    const userName = user?.displayName || 'ASTRA Player';
     const userHandle = user?.email ? `@${user.email.split('@')[0]}` : '';
     const userAvatar = user?.photoURL || `https://api.dicebear.com/8.x/bottts/svg?seed=${user?.uid}`;
 

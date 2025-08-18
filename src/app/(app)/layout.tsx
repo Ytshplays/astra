@@ -67,7 +67,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
           <DialogHeader>
             <DialogTitle className="text-2xl">Access Restricted</DialogTitle>
             <DialogDescription>
-              You need to be signed in to access the Nexus Hub.
+              You need to be signed in to access ASTRA.
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
@@ -121,7 +121,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [user] = useAuthState(auth);
   const router = useRouter();
 
-  const userName = user?.displayName || 'Nexus Player';
+  const userName = user?.displayName || 'ASTRA Player';
   const userAvatar = user?.photoURL;
   
   const handleSignOut = async () => {

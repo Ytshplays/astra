@@ -44,7 +44,7 @@ export default function LoginPage() {
             displayName: displayName || user.displayName || user.email?.split('@')[0],
             photoURL: user.photoURL || `https://api.dicebear.com/8.x/bottts/svg?seed=${user.uid}`,
             friends: [],
-            bio: 'A new player exploring the Nexus Hub.',
+            bio: 'A new player exploring the ASTRA platform.',
             favoriteGenres: [],
         });
     }
@@ -102,7 +102,7 @@ export default function LoginPage() {
           <CardHeader>
             <CardTitle className="text-2xl">{isLogin ? 'Welcome Back' : 'Create an Account'}</CardTitle>
             <CardDescription>
-              {isLogin ? 'Sign in to access your unified gaming universe.' : 'Join the Nexus Hub today!'}
+              {isLogin ? 'Sign in to access your unified gaming universe.' : 'Join ASTRA today!'}
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">

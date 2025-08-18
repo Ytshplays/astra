@@ -2,7 +2,7 @@
 import { DiscoveryForm } from './discovery-form';
 
 export const metadata = {
-  title: 'Discover Games | Nexus Hub',
+  title: 'Discover Games | ASTRA',
   description: 'Let our AI find your next favorite game based on your history and preferences.',
 };
 

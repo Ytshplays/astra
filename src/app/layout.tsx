@@ -4,7 +4,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Nexus Hub',
+  title: 'ASTRA',
   description: 'A new revolution in the gaming console industry.',
 };
 

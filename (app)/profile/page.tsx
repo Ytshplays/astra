@@ -47,7 +47,7 @@ export default function ProfilePage() {
             if (doc.exists()) {
                 const data = doc.data();
                 setProfileData({
-                    bio: data.bio || 'A new player exploring the Nexus Hub.',
+                    bio: data.bio || 'A new player exploring the ASTRA platform.',
                     favoriteGenres: data.favoriteGenres || ['RPG', 'Strategy', 'Indie'],
                 });
             }
@@ -121,7 +121,7 @@ export default function ProfilePage() {
         setIsEditing(false);
     };
 
-    const userName = user?.displayName || 'Nexus Player';
+    const userName = user?.displayName || 'ASTRA Player';
     const userHandle = user?.email ? `@${user.email.split('@')[0]}`: '';
     const userAvatar = user?.photoURL || `https://api.dicebear.com/8.x/bottts/svg?seed=${user?.uid}`;
 

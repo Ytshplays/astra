@@ -31,7 +31,7 @@ export function NexusLogo({ className }: { className?: string }) {
         />
       </svg>
       <h1 className="text-xl font-bold text-foreground group-data-[collapsible=icon]/sidebar-wrapper:hidden">
-        Nexus Hub
+        ASTRA
       </h1>
     </div>
   );

@@ -87,7 +87,7 @@ export default function LandingPage() {
                     Your Gaming Universe, Unified.
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg text-muted-foreground md:text-xl">
-                    Nexus Hub brings all your games, friends, and achievements together in one powerful, beautiful interface. Stop juggling launchers and start playing.
+                    ASTRA brings all your games, friends, and achievements together in one powerful, beautiful interface. Stop juggling launchers and start playing.
                 </p>
                 <div className="mt-8 flex gap-4">
                     {getCtaButton()}
@@ -100,7 +100,7 @@ export default function LandingPage() {
                  <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">The Last Game Launcher You'll Ever Need</h2>
                     <p className="mt-4 text-lg text-muted-foreground">
-                        Nexus Hub is packed with features designed for the modern gamer.
+                        ASTRA is packed with features designed for the modern gamer.
                     </p>
                 </div>
                 <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -120,7 +120,7 @@ export default function LandingPage() {
 
       <footer className="border-t border-border/40 py-6">
           <div className="container text-center text-sm text-muted-foreground">
-              © {currentYear || 2024} Nexus Hub. All rights reserved.
+              © {currentYear || 2024} ASTRA. All rights reserved.
           </div>
       </footer>
     </div>

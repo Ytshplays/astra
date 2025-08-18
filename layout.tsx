@@ -53,7 +53,7 @@ const AppLayout = React.memo(function AppLayout({ children }: { children: React.
   const pathname = usePathname();
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userName = user?.displayName || 'Nexus Player';
+  const userName = user?.displayName || 'ASTRA Player';
   const userAvatar = user?.photoURL;
   
   const handleSignOut = async () => {
