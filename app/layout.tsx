@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     shortcut: '/ASTRA_(1)[1].png',
     apple: '/ASTRA_(1)[1].png',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({

@@ -96,14 +96,14 @@ export default function LoginPage() {
   return (
     <>
       <GrokParticleBackground config="login" />
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center p-4 animated-gradient">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 lg:p-8 animated-gradient">
         <div className="absolute top-4 left-4">
-            <NexusLogo />
+            <NexusLogo className="h-6 w-auto sm:h-8" />
         </div>
-        <Card className="w-full max-w-sm">
-          <CardHeader>
-            <CardTitle className="text-2xl">{isLogin ? 'Welcome Back' : 'Create an Account'}</CardTitle>
-            <CardDescription>
+        <Card className="w-full max-w-xs sm:max-w-sm">
+          <CardHeader className="space-y-2">
+            <CardTitle className="text-xl sm:text-2xl text-center">{isLogin ? 'Welcome Back' : 'Create an Account'}</CardTitle>
+            <CardDescription className="text-center text-sm">
               {isLogin ? 'Sign in to access your unified gaming universe.' : 'Join Astra today!'}
             </CardDescription>
           </CardHeader>

@@ -132,10 +132,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthGate>
         <TooltipProvider>
-            <div className="relative min-h-screen w-full bg-background text-foreground animated-gradient">
+            <div className="relative min-h-screen w-full max-w-full bg-background text-foreground animated-gradient overflow-x-hidden">
 
                 {/* Header */}
-                <header className="sticky top-0 z-50 flex h-20 items-center justify-between border-b border-white/10 bg-background/30 px-6 backdrop-blur-xl">
+                <header className="sticky top-0 z-50 flex h-16 md:h-20 items-center justify-between border-b border-white/10 bg-background/30 px-4 md:px-6 backdrop-blur-xl">
                     <Link href="/dashboard" className="flex items-center gap-3">
                         <NexusLogo />
                     </Link>
@@ -148,7 +148,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                                 variant="ghost"
                                 asChild
                                 className={cn(
-                                    "text-lg font-semibold transition-colors duration-300",
+                                    "text-sm lg:text-lg font-semibold transition-colors duration-300",
                                     pathname.startsWith(item.href)
                                         ? "text-primary"
                                         : "text-muted-foreground hover:text-foreground"
@@ -160,13 +160,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     </nav>
 
                     {/* Profile and Actions */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 md:gap-4">
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant="ghost" size="icon" onClick={() => router.push('/profile')}>
-                                    <Avatar className="size-10 border-2 border-transparent hover:border-primary transition-colors">
+                                    <Avatar className="size-8 md:size-10 border-2 border-transparent hover:border-primary transition-colors">
                                         {userAvatar && <AvatarImage src={userAvatar} alt={userName} data-ai-hint="person" />}
-                                        <AvatarFallback>
+                                        <AvatarFallback className="text-xs md:text-sm">
                                             {userName?.split(' ').map((n) => n[0]).join('')}
                                         </AvatarFallback>
                                     </Avatar>
@@ -179,7 +179,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                          <Tooltip>
                             <TooltipTrigger asChild>
                                 <Button variant="ghost" size="icon" onClick={handleSignOut}>
-                                    <LogOut className="h-6 w-6 text-muted-foreground transition-colors hover:text-foreground" />
+                                    <LogOut className="h-4 w-4 md:h-6 md:w-6 text-muted-foreground transition-colors hover:text-foreground" />
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
@@ -189,27 +189,27 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     </div>
                 </header>
 
-                <main className="relative z-10 p-4 sm:p-6 lg:p-8">
-                    <div className="animate-fade-in-up">
+                <main className="relative z-10 p-2 sm:p-4 md:p-6 lg:p-8 min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)] pb-20 lg:pb-8">
+                    <div className="animate-fade-in-up w-full max-w-full overflow-x-hidden">
                         {children}
                     </div>
                 </main>
 
                  {/* Mobile Bottom Navigation */}
                 <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-background/80 backdrop-blur-lg">
-                    <div className="flex justify-around items-center h-16">
+                    <div className="flex justify-around items-center h-16 max-w-full overflow-x-auto px-2">
                     {navItems.slice(0, 5).map((item) => (
                         <Tooltip key={item.href}>
                              <TooltipTrigger asChild>
                                 <Link
                                     href={item.href}
                                     className={cn(
-                                    "flex flex-col items-center justify-center gap-1 p-2 rounded-md transition-colors duration-200",
+                                    "flex flex-col items-center justify-center gap-1 p-1 md:p-2 rounded-md transition-colors duration-200 min-w-[3rem] flex-shrink-0",
                                     pathname.startsWith(item.href) ? "text-primary" : "text-muted-foreground hover:text-foreground"
                                     )}
                                 >
-                                    <item.icon className="h-6 w-6" />
-                                    <span className="text-xs font-medium">{item.label}</span>
+                                    <item.icon className="h-5 w-5 md:h-6 md:w-6" />
+                                    <span className="text-[10px] md:text-xs font-medium truncate max-w-16 text-center">{item.label}</span>
                                 </Link>
                             </TooltipTrigger>
                              <TooltipContent>
