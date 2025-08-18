@@ -67,7 +67,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
           <DialogHeader>
             <DialogTitle className="text-2xl">Access Restricted</DialogTitle>
             <DialogDescription>
-              You need to be signed in to access the Nexus Hub.
+              You need to be signed in to access Astra.
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">

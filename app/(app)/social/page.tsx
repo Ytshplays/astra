@@ -268,7 +268,7 @@ export default function SocialPage() {
       <div className="flex flex-col gap-8 console-scanlines">
         {/* Console Status Bar */}
         <div className="console-status-bar">
-          <span>[NEXUS SOCIAL] - NETWORK ACCESS</span>
+          <span>[ASTRA SOCIAL] - NETWORK ACCESS</span>
           <span>{friends.length} CONNECTIONS | STATUS: ONLINE</span>
         </div>
 

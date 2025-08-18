@@ -22,11 +22,11 @@ export function ClientWrapper({ children }: ClientWrapperProps) {
     }
 
     // Check if this is the first visit
-    const hasVisited = sessionStorage.getItem('nexus-hub-visited');
+    const hasVisited = sessionStorage.getItem('astra-visited');
     
     if (!hasVisited) {
       // First visit - show booting animation
-      sessionStorage.setItem('nexus-hub-visited', 'true');
+      sessionStorage.setItem('astra-visited', 'true');
       setShowBooting(true);
     } else {
       // Not first visit - skip booting animation

@@ -112,8 +112,8 @@ export default function GamesPage() {
       <div className="relative flex h-[calc(100vh-12rem)] flex-col items-center justify-center gap-8 overflow-hidden console-scanlines">
         {/* Console Status Bar */}
         <div className="absolute top-0 left-0 right-0 console-status-bar z-20">
-          <span>[NEXUS GAMES] - LIBRARY ACCESS</span>
-          <span>{games.length} GAMES | STATUS: READY</span>
+          <span>[ASTRA GAMES] - LIBRARY ACCESS</span>
+          <span>{games.length} GAMES | STATUS: ONLINE</span>
         </div>
 
         <Dialog open={!!selectedGame} onOpenChange={(isOpen) => !isOpen && setSelectedGame(null)}>
